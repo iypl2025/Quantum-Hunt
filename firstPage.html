@@ -1,1 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IYPL 2025 Treasure Hunt</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
 
+        .container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .answer-box {
+            text-align: center;
+        }
+
+        input {
+            padding: 10px;
+            width: 200px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        /* Movable vertical line */
+        .divider {
+            width: 5px;
+            background-color: gray;
+            cursor: ew-resize;
+            position: relative;
+        }
+
+        /* Right side with an image */
+        .image-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f4f4f4;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Left Side: Answer Box -->
+    <div class="container">
+        <div class="answer-box">
+            <label for="answer">Enter your answer:</label>
+            <br>
+            <input type="text" id="answer">
+            <br>
+            <button onclick="checkAnswer()">Submit</button>
+        </div>
+    </div>
+
+    <!-- Movable Vertical Line -->
+    <div class="divider" id="divider"></div>
+
+    <!-- Right Side: Image -->
+    <div class="image-container">
+        <img src="page1.png.png" alt="Custom Image">
+    </div>
+
+<script>
+    function collatzSteps(n) {
+        let steps = 0;
+        while (n !== 1) {
+            if (n % 2 === 0) {
+                n = n / 2;
+            } else {
+                n = 3 * n + 1;
+            }
+            steps++;
+        }
+        return steps;
+    }
+
+    function checkAnswer() {
+        const userAnswer = document.getElementById('answer').value;
+        const correctAnswer = collatzSteps(7887663552367);
+        
+        if (parseInt(userAnswer) === correctAnswer) {
+            alert("Correct! You may proceed.");
+        } else {
+            alert("Incorrect. Try again!");
+        }
+    }
+
+    // Make the divider movable
+    const divider = document.getElementById("divider");
+    let isDragging = false;
+
+    divider.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        document.addEventListener("mousemove", moveDivider);
+        document.addEventListener("mouseup", () => {
+            isDragging = false;
+            document.removeEventListener("mousemove", moveDivider);
+        });
+    });
+
+    function moveDivider(e) {
+        if (isDragging) {
+            let percent = (e.clientX / window.innerWidth) * 100;
+            percent = Math.max(10, Math.min(90, percent)); // Restrict range
+            document.querySelector(".container").style.flex = percent;
+            document.querySelector(".image-container").style.flex = 100 - percent;
+        }
+    }
+</script>
+
+</body>
+</html>
