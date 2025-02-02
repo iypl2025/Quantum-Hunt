@@ -62,21 +62,37 @@
             cursor: ew-resize;
             position: relative;
         }
-
-        /* Right side with an image */
-        .image-container {
+        .letter-container {
             flex: 1;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start; /* Align to the top */
             background-color: #f4f4f4;
             height: 100vh;
+            padding: 20px;
+            text-align: left;
+            flex-direction: column; /* Stack the heading and the letter */
         }
 
-        .image-container img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: cover;
+        .letter-heading {
+            font-size: 40px;
+            font-weight: bold;
+            text-align: left;
+            margin-bottom: 50px;
+            margin-left: 80px;
+        }
+
+        .letter {
+            max-width: 600px;
+            font-size: 18px;
+            line-height: 1.5;
+        }
+
+
+        .signature {
+            margin-top: 20px;
+            font-style: italic;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -98,13 +114,20 @@
     <!-- Movable Vertical Line -->
     <div class="divider" id="divider"></div>
 
-    <!-- Right Side: Image -->
-    <div class="image-container">
-        <img src="page1.png" alt="Custom Image">
+    <!-- Right Side: Letter -->
+    <div class="letter-container">
+        <div class="letter-heading">Letter from Paul Dirac</div>
+        <div class="letter">
+            Dear Seekers of Truth,<br><br>
+            You stand on the threshold of discovery, poised at the pen<b>t</b>ultimate question of this journey through the quantum realm. It is a fitting tribute to a century of quantum mechanics that you find <b>yorselves</b> here, navigating a path shaped by both logic and <b>curiosty</b>.<br><br>
+            The answers you seek may see<b>n</b> elusive, for such is the nature of this <b>disipline</b>. As you progress, rem<b>n</b>ain diligent—hidden connections <b>ofen</b> emerge when least expected. Every observation brings new insight, and small details can lead to profound rev<b>a</b>lations.<br><br>
+            The final step is near. Gath<b>a</b>r your resolve, trust your instincts, and proceed with care. What lies ahead will reward the sharpest minds. Yours in pursuit of the unknown,<br><br><strong>Paul Dirac</strong>
+        </div>
     </div>
+    
+    
 
 <script>
-
     // Trigger checkAnswer() when Enter key is pressed
     document.getElementById("answer").addEventListener("keypress", function(event) {
         if (event.key === "Enter") { 
@@ -114,11 +137,10 @@
 
     function checkAnswer() {
         const userAnswer = document.getElementById('answer').value.trim().toLowerCase().replace(/\s+/g, "");
-        const correctAnswer = "bornoppenheimerapproximation"; // No spaces, all lowercase
+        const correctAnswer = "uncertainty"; // No spaces, all lowercase
 
         if (userAnswer === correctAnswer) {
             alert("Correct! You may proceed.");
-            window.location.href = "SecondPage.html";
         } else {
             alert("Incorrect. Try again!");
         }
@@ -142,7 +164,7 @@
             let percent = (e.clientX / window.innerWidth) * 100;
             percent = Math.max(10, Math.min(90, percent)); // Restrict range
             document.querySelector(".container").style.flex = percent;
-            document.querySelector(".image-container").style.flex = 100 - percent;
+            document.querySelector(".letter-container").style.flex = 100 - percent;
         }
     }
 </script>
