@@ -19,6 +19,13 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
+            flex-direction: column;
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
         }
 
         .answer-box {
@@ -27,7 +34,7 @@
 
         input {
             padding: 10px;
-            width: 200px;
+            width: 250px;
             font-size: 16px;
         }
 
@@ -67,6 +74,7 @@
 
     <!-- Left Side: Answer Box -->
     <div class="container">
+        <div class="title">IYPL 2025 Treasure Hunt</div>
         <div class="answer-box">
             <label for="answer">Enter your answer:</label>
             <br>
@@ -81,28 +89,15 @@
 
     <!-- Right Side: Image -->
     <div class="image-container">
-        <img src="page1.png.png" alt="Custom Image">
+        <img src="page1.png" alt="Custom Image">
     </div>
 
 <script>
-    function collatzSteps(n) {
-        let steps = 0;
-        while (n !== 1) {
-            if (n % 2 === 0) {
-                n = n / 2;
-            } else {
-                n = 3 * n + 1;
-            }
-            steps++;
-        }
-        return steps;
-    }
-
     function checkAnswer() {
-        const userAnswer = document.getElementById('answer').value;
-        const correctAnswer = collatzSteps(7887663552367);
-        
-        if (parseInt(userAnswer) === correctAnswer) {
+        const userAnswer = document.getElementById('answer').value.trim().toLowerCase().replace(/\s+/g, "");
+        const correctAnswer = "bornoppenheimerapproximation"; // No spaces, all lowercase
+
+        if (userAnswer === correctAnswer) {
             alert("Correct! You may proceed.");
         } else {
             alert("Incorrect. Try again!");
