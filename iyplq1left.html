@@ -61,11 +61,11 @@
     </style>
 </head>
 <body>
-    <h1>IYPL 2025  Quantum Hunt</h1>
+    <h1>IYPL 2025 Quantum Hunt</h1>
 
     <h2>To move on to the next phase</h2>
     <p>
-        Calculate the steps it takes 7887663552367 <br>to reach 1 in Collatz conjecture      </p>
+        Refer to the Question given below,<br> and make the code on right panel to solve it.<br> The answer leads you to the next phase of the hunt  </p>
     <form id="validationForm">
         <label for="inputValue">Enter your answer:</label>
         <input type="text" id="inputValue" required onkeydown="handleKeyPress(event)">
@@ -74,48 +74,33 @@
 
     <p id="result"></p>
 
-   <script>
-    // Trigger checkAnswer() when Enter key is pressed
-    document.getElementById("answer").addEventListener("keypress", function(event) {
-        if (event.key === "Enter") { 
-            checkAnswer();
+    <script>
+        function checkInput() {
+            var inputValue = document.getElementById('inputValue').value;
+
+            // Your validation logic here
+            // For example, let's say the correct value is "openai"
+            if (inputValue === "511") {
+                // Correct, redirect to main.html
+                top.location.href = "main.html";
+            } else {
+                // Incorrect, show error message
+                document.getElementById('result').innerHTML = "Wrong answer. Please try again.";
+            }
         }
-    });
 
-    function checkAnswer() {
-        const userAnswer = document.getElementById('answer').value.trim().toLowerCase().replace(/\s+/g, "");
-        const correctAnswer = "uncertainty"; // No spaces, all lowercase
-
-        if (userAnswer === correctAnswer) {
-            alert("Correct! You may proceed.");
-            window.location.href = "main12.html";
-        } else {
-            alert("Incorrect. Try again!");
+        function handleKeyPress(event) {
+            // Check if the pressed key is Enter (key code 13)
+            if (event.keyCode === 13) {
+                checkInput();
+            }
         }
-    }
+    </script>
 
-    // Make the divider movable
-    const divider = document.getElementById("divider");
-    let isDragging = false;
 
-    divider.addEventListener("mousedown", (e) => {
-        isDragging = true;
-        document.addEventListener("mousemove", moveDivider);
-        document.addEventListener("mouseup", () => {
-            isDragging = false;
-            document.removeEventListener("mousemove", moveDivider);
-        });
-    });
-
-    function moveDivider(e) {
-        if (isDragging) {
-            let percent = (e.clientX / window.innerWidth) * 100;
-            percent = Math.max(10, Math.min(90, percent)); // Restrict range
-            document.querySelector(".container").style.flex = percent;
-            document.querySelector(".letter-container").style.flex = 100 - percent;
-        }
-    }
-</script>
+    
+  
+  <img src="q1 image.jpg" alt="Relevant Image">
 
 </body>
 </html>
