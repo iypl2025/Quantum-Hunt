@@ -15,8 +15,8 @@
         h1 {
             color: #333;
         }
-        h2{
-            color:#3168d7
+        h2 {
+            color: #3168d7;
         }
 
         form {
@@ -59,8 +59,7 @@
 
     <h2>To move on to the next phase</h2>
 
-    <h1>what does the 'H' stands for in this formula ???</h1>
-
+    <h1>What does the 'H' stand for in this formula ???</h1>
 
     <form id="validationForm">
         <label for="inputValue">Enter your answer:</label>
@@ -70,67 +69,50 @@
 
     <p id="result"></p>
 
-   
-<script>
-    // Trigger checkAnswer() when Enter key is pressed
-    document.getElementById("answer").addEventListener("keypress", function(event) {
-        if (event.key === "Enter") { 
-            checkAnswer();
+    <script>
+        async function hashInput(input) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(input);
+            const hash = await crypto.subtle.digest("SHA-256", data);
+            return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, "0")).join("");
         }
-    });
 
-    function checkAnswer() {
-        const userAnswer = document.getElementById('answer').value.trim().toLowerCase().replace(/\s+/g, "");
-        const correctAnswer = "Congratulations you win"; // No spaces, all lowercase
+        async function checkInput() {
+            var inputValue = document.getElementById('inputValue').value;
+            var hashedInput = await hashInput(inputValue.toLowerCase());
 
-        if (userAnswer === correctAnswer) {
-            alert("Correct! You may proceed.");
-            window.location.href = "main.html";
-        } else {
-            alert("Incorrect. Try again!");
+            // Precomputed hash of the correct answer ("Congratulations you win")
+            var correctHash = "dece72d542fbd99e43f9b5b13c6d77f77f56eeb3649534f3cbeebfbeee3ed63b";
+
+            if (hashedInput === correctHash) {
+                alert("Correct! You may proceed.");
+                top.location.href = "https://meet.google.com/haz-pxum-yed";
+            } else {
+                alert("Incorrect. Try again!");
+                document.getElementById('result').innerHTML = "Wrong answer. Please try again.";
+            }
         }
-    }
 
-    // Make the divider movable
-    const divider = document.getElementById("divider");
-    let isDragging = false;
-
-    divider.addEventListener("mousedown", (e) => {
-        isDragging = true;
-        document.addEventListener("mousemove", moveDivider);
-        document.addEventListener("mouseup", () => {
-            isDragging = false;
-            document.removeEventListener("mousemove", moveDivider);
-        });
-    });
-
-    function moveDivider(e) {
-        if (isDragging) {
-            let percent = (e.clientX / window.innerWidth) * 100;
-            percent = Math.max(10, Math.min(90, percent)); // Restrict range
-            document.querySelector(".container").style.flex = percent;
-            document.querySelector(".letter-container").style.flex = 100 - percent;
+        function handleKeyPress(event) {
+            if (event.keyCode === 13) {
+                checkInput();
+            }
         }
-    }
-</script>
-<style>
-        
-    img {
-        max-width: 85%;
-        height: auto;
-        display: block;
-        margin: 0 auto;
-    }
+    </script>
 
-    p {
-        margin-top: 15px;
-        font-size: 25px;
-    }
-</style>
+    <style>
+        img {
+            max-width: 85%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
 
-
-
-
+        p {
+            margin-top: 15px;
+            font-size: 25px;
+        }
+    </style>
 
 </body>
 </html>
