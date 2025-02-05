@@ -58,7 +58,6 @@
 
         button:hover {
             background-color: #45a049;
-        }p: 10px;
         }
 
         /* Movable vertical line */
@@ -111,6 +110,27 @@
     </div>
 
 <script>
+    async function hashInput(input) {
+        const encoder = new TextEncoder();
+        const data = encoder.encode(input);
+        const hash = await crypto.subtle.digest("SHA-256", data);
+        return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, "0")).join("");
+    }
+
+    async function checkAnswer() {
+        const userAnswer = document.getElementById('answer').value.trim().toLowerCase().replace(/\s+/g, "");
+        const hashedInput = await hashInput(userAnswer);
+
+        // Precomputed SHA-256 hash of "bornoppenheimerapproximation"
+        const correctHash = "2a69ec47e17a8b840d393d3807b1957e8f8e1973b61386fcbd816c79f31d041e";
+
+        if (hashedInput === correctHash) {
+            alert("Correct! You may proceed.");
+            window.location.href = "SecondPage.html";
+        } else {
+            alert("Incorrect. Try again!");
+        }
+    }
 
     // Trigger checkAnswer() when Enter key is pressed
     document.getElementById("answer").addEventListener("keypress", function(event) {
@@ -118,18 +138,6 @@
             checkAnswer();
         }
     });
-
-    function checkAnswer() {
-        const userAnswer = document.getElementById('answer').value.trim().toLowerCase().replace(/\s+/g, "");
-        const correctAnswer = "bornoppenheimerapproximation"; // No spaces, all lowercase
-
-        if (userAnswer === correctAnswer) {
-            alert("Correct! You may proceed.");
-            window.location.href = "SecondPage.html";
-        } else {
-            alert("Incorrect. Try again!");
-        }
-    }
 
     // Make the divider movable
     const divider = document.getElementById("divider");
