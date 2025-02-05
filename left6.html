@@ -70,24 +70,49 @@
 
     <p id="result"></p>
 
-    <script>
-        function checkInput() {
-            var inputValue = document.getElementById('inputValue').value;
-
-            // Your validation logic here
-            // For example, let's say the correct value is "openai"
-            if (inputValue.toLowerCase() === "Congratulations you win") {
-                // Correct, redirect to main.html
-                alert("Correct! You may proceed.");
-                top.location.href = "https://meet.google.com/haz-pxum-yed";
-            } else {
-                // Incorrect, show error message
-                alert("Incorrect. Try again!");
-                document.getElementById('result').innerHTML = "Wrong answer. Please try again.";
-            }
+   
+<script>
+    // Trigger checkAnswer() when Enter key is pressed
+    document.getElementById("answer").addEventListener("keypress", function(event) {
+        if (event.key === "Enter") { 
+            checkAnswer();
         }
+    });
 
-    </script>
+    function checkAnswer() {
+        const userAnswer = document.getElementById('answer').value.trim().toLowerCase().replace(/\s+/g, "");
+        const correctAnswer = "Congratulations you win"; // No spaces, all lowercase
+
+        if (userAnswer === correctAnswer) {
+            alert("Correct! You may proceed.");
+            window.location.href = "main.html";
+        } else {
+            alert("Incorrect. Try again!");
+        }
+    }
+
+    // Make the divider movable
+    const divider = document.getElementById("divider");
+    let isDragging = false;
+
+    divider.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        document.addEventListener("mousemove", moveDivider);
+        document.addEventListener("mouseup", () => {
+            isDragging = false;
+            document.removeEventListener("mousemove", moveDivider);
+        });
+    });
+
+    function moveDivider(e) {
+        if (isDragging) {
+            let percent = (e.clientX / window.innerWidth) * 100;
+            percent = Math.max(10, Math.min(90, percent)); // Restrict range
+            document.querySelector(".container").style.flex = percent;
+            document.querySelector(".letter-container").style.flex = 100 - percent;
+        }
+    }
+</script>
 <style>
         
     img {
