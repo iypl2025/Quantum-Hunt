@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Output Validation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 10% auto;
+        }
+
+        h1 {
+            color: #333;
+        }
+        h2{
+            color:#3168d7
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            font-size: 18px;
+            margin-right: 10px;
+        }
+
+        input {
+            padding: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 13px;
+            margin-top: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            font-size: 18px;
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>IYPL 2025 Treasure Hunt</h1>
+
+    <h2>To move on to the next phase</h2>
+    <h1>Identify the speaker name in given audio?</h1>
+
+    <form id="validationForm">
+        <label for="inputValue">Enter your answer:</label>
+        <input type="text" id="inputValue" required onkeydown="handleKeyPress(event)">
+        <button type="button" onclick="checkInput()">Submit</button>
+    </form>
+
+    <p id="result"></p>
+
+    <script>
+        function checkInput() {
+            var inputValue = document.getElementById('inputValue').value;
+
+            // Your validation logic here
+            // For example, let's say the correct value is "openai"
+                // Correct, redirect to main.html
+                if (inputValue.toLowerCase() === "Paul Dirac") {
+                    alert("Correct! You may proceed.");
+
+                top.location.href = "main5.html";
+            } else {
+                // Incorrect, show error message
+                alert("Incorrect. Try again!");
+                document.getElementById('result').innerHTML = "Wrong answer. Please try again.";
+            }
+        }
+
+        function handleKeyPress(event) {
+            // Check if the pressed key is Enter (key code 13)
+            if (event.keyCode === 13) {
+                checkInput();
+            }
+        }
+    </script>
+<p>
+    Hint : In the realm of the tiny, where particles roam,<br>
+    Uncertainty reigns in quantum's home.<br>
+    What term describes the simultaneous state,<br>
+    Of particles entangled in quantum's gate?
+</p>
+</body>
+</html>
