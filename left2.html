@@ -60,9 +60,9 @@
     <h1>Identify the speaker name in given audio?</h1>
 
     <form id="validationForm">
-        <label for="inputValue">Enter your answer:</label>
-        <input type="text" id="inputValue" required onkeydown="handleKeyPress(event)">
-        <button type="button" onclick="checkInput()">Submit</button>
+        <label for="answer">Enter your answer:</label>
+        <input type="text" id="answer" required>
+        <button type="button" onclick="checkAnswer()">Submit</button>
     </form>
 
     <p id="result"></p>
@@ -79,11 +79,12 @@
 
     function checkAnswer() {
         const userAnswer = document.getElementById('answer').value.trim().toLowerCase().replace(/\s+/g, "");
-        const correctAnswer = "Paul Dirac"; // No spaces, all lowercase
+        const correctAnswer = "pauldirac"; // No spaces, all lowercase
+
 
         if (userAnswer === correctAnswer) {
             alert("Correct! You may proceed.");
-            window.location.href = "main5.html";
+            window.top.location.href = "main5.html";
         } else {
             alert("Incorrect. Try again!");
         }
