@@ -3,43 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Output Validation</title>
+    <title>IYPL 2025 Quantum Hunt</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            flex-direction: column;
+            background-color: white;
+        }
+
+        .title {
+            font-size: 35px;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .subtitle {
+            font-size: 25px;
+            color: blue;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+
+        .answer-box {
             text-align: center;
-            margin: 10% auto;
-            background-color: #f5f5f5;
-        }
-        img{
-            height: auto;
-            width: 80%;
-        }
-        p{
-            margin-top: 50px;
-        }
-        h1 {
-            color: #333;
-        }
-        h2{
-            color:#3168d7
-        }
-
-        form {
-            margin-top: 20px;
-        }
-
-        label {
-            font-size: 18px;
-            margin-right: 10px;
         }
 
         input {
-            padding: 8px;
+            padding: 10px;
+            width: 250px;
             font-size: 16px;
         }
 
-        button {
+         button {
             padding: 13px;
             margin-top: 30px;
             font-size: 16px;
@@ -53,29 +60,80 @@
             background-color: #45a049;
         }
 
-        #result {
+        /* Movable vertical line */
+        .divider {
+            width: 5px;
+            background-color: gray;
+            cursor: ew-resize;
+            position: relative;
+        }
+        .letter-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align to the top */
+            background-color: #f4f4f4;
+            height: 100vh;
+            padding: 20px;
+            text-align: left;
+            flex-direction: column; /* Stack the heading and the letter */
+        }
+
+        .letter-heading {
+            font-size: 40px;
+            font-weight: bold;
+            text-align: left;
+            margin-bottom: 50px;
+            margin-left: 80px;
+        }
+
+        .letter {
+            max-width: 600px;
             font-size: 18px;
-            color: red;
-            margin-top: 10px;
+            line-height: 1.5;
+        }
+
+
+        .signature {
+            margin-top: 20px;
+            font-style: italic;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <h1>IYPL 2025 Quantum Hunt</h1>
 
-    <h2>To move on to the next phase</h2>
-    <p>
-        Refer to the Question given below,<br> and make the code on right panel to solve it.<br> The answer leads you to the next phase of the hunt  </p>
-    <form id="validationForm">
-        <label for="inputValue">Enter your answer:</label>
-        <input type="text" id="inputValue" required onkeydown="handleKeyPress(event)">
-        <button type="button" onclick="checkInput()">Submit</button>
-    </form>
+    <!-- Left Side: Answer Box -->
+    <div class="container">
+        <div class="title">IYPL 2025 Treasure Hunt</div>
+        <div class="subtitle">To move on to the next phase</div>
+         <div class="title"> identifying the errors and forming a word or concept related to quantum mechanics!</div>
+        <div class="answer-box">
+            <label for="answer">Enter your answer:</label>
+            <br>
+            <input type="text" id="answer">
+            <br>
+            <button onclick="checkAnswer()">Submit</button>
+        </div>
+    </div>
 
-    <p id="result"></p>
+    <!-- Movable Vertical Line -->
+    <div class="divider" id="divider"></div>
 
-    <script>
+    <!-- Right Side: Letter -->
+    <div class="letter-container">
+        <div class="letter-heading">Letter from Paul Dirac</div>
+        <div class="letter">
+            Dear Seekers of Truth,<br><br>
+            You stand on the threshold of discovery, poised at the pen<b>t</b>ultimate question of this journey through the quantum realm. It is a fitting tribute to a century of quantum mechanics that you find <b>yorselves</b> here, navigating a path shaped by both logic and <b>curiosty</b>.<br><br>
+            The answers you seek may see<b>n</b> elusive, for such is the nature of this <b>disipline</b>. As you progress, rem<b>n</b>ain diligent—hidden connections <b>ofen</b> emerge when least expected. Every observation brings new insight, and small details can lead to profound rev<b>a</b>lations.<br><br>
+            The final step is near. Gath<b>a</b>r your resolve, trust your instincts, and proceed with care. What lies ahead will reward the sharpest minds. Yours in pursuit of the unknown,<br><br><strong>Paul Dirac</strong>
+        </div>
+    </div>
+    
+    
 
+<script>
     // Trigger checkAnswer() when Enter key is pressed
     document.getElementById("answer").addEventListener("keypress", function(event) {
         if (event.key === "Enter") { 
@@ -85,11 +143,11 @@
 
     function checkAnswer() {
         const userAnswer = document.getElementById('answer').value.trim().toLowerCase().replace(/\s+/g, "");
-        const correctAnswer = "you"; // No spaces, all lowercase
+        const correctAnswer = "uncertainty"; // No spaces, all lowercase
 
         if (userAnswer === correctAnswer) {
             alert("Correct! You may proceed.");
-            window.location.href = "main.html";
+            window.location.href = "main12.html";
         } else {
             alert("Incorrect. Try again!");
         }
@@ -113,15 +171,10 @@
             let percent = (e.clientX / window.innerWidth) * 100;
             percent = Math.max(10, Math.min(90, percent)); // Restrict range
             document.querySelector(".container").style.flex = percent;
-            document.querySelector(".image-container").style.flex = 100 - percent;
+            document.querySelector(".letter-container").style.flex = 100 - percent;
         }
     }
 </script>
-
-
-    
-  
-  <img src="q1 image.jpg" alt="Relevant Image">
 
 </body>
 </html>
