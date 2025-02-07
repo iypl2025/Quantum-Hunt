@@ -143,11 +143,11 @@
 
     function checkAnswer() {
         const userAnswer = document.getElementById('answer').value.trim().toLowerCase().replace(/\s+/g, "");
-        const correctAnswer = "uncertainty"; // No spaces, all lowercase
+        const correctAnswer = "123"; // No spaces, all lowercase
 
         if (userAnswer === correctAnswer) {
             alert("Correct! You may proceed.");
-            window.location.href = "main12.html";
+            window.location.href = "main.html";
         } else {
             alert("Incorrect. Try again!");
         }
