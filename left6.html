@@ -71,27 +71,22 @@
 
     <script>
         function checkInput() {
-            var inputValue = document.getElementById('inputValue').value;
+            var inputValue = document.getElementById('inputValue').value.trim(); // Trim whitespace
 
-            // Your validation logic here
-            // For example, let's say the correct value is "openai"
-                // Correct, redirect to main.html
-                if (inputValue.toLowerCase() === "Congratulationsyouwin") {
-
-                top.location.href = "https://meet.google.com/now-hcbu-nvk";
+            // Convert input to lowercase to avoid case sensitivity issues
+            if (inputValue.toLowerCase() === "congratulationsyouwin") {
+                window.location.href = "https://meet.google.com/now-hcbu-nvk";
             } else {
-                // Incorrect, show error message
                 document.getElementById('result').innerHTML = "Wrong answer. Please try again.";
             }
         }
 
         function handleKeyPress(event) {
-            // Check if the pressed key is Enter (key code 13)
-            if (event.keyCode === 13) {
+            if (event.key === "Enter") { // Modern way to check Enter key
+                event.preventDefault(); // Prevent form submission
                 checkInput();
             }
         }
     </script>
-<style>
 </body>
 </html>
