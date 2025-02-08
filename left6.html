@@ -61,7 +61,7 @@
 
     <h1>Decode the Given Morse Code???</h1>
 
-    <form id="validationForm">
+   <form id="validationForm">
         <label for="inputValue">Enter your answer:</label>
         <input type="text" id="inputValue" required onkeydown="handleKeyPress(event)">
         <button type="button" onclick="checkInput()">Submit</button>
@@ -75,8 +75,9 @@
 
             // Your validation logic here
             // For example, let's say the correct value is "openai"
-            if (inputValue.toLowerCase() === "Congratulationsyouwin") {
                 // Correct, redirect to main.html
+                if (inputValue.toLowerCase() === "Congratulationsyouwin") {
+
                 top.location.href = "https://meet.google.com/now-hcbu-nvk";
             } else {
                 // Incorrect, show error message
