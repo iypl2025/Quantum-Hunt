@@ -61,32 +61,35 @@
     <p>
         Refer to the Question given below,<br> and make the code on the right panel to solve it.<br> The answer leads you to the next phase of the hunt.
     </p>
+    
     <form id="validationForm">
         <label for="inputValue">Enter your answer:</label>
-        <input type="text" id="inputValue" required>
-        <button type="button" onclick="checkAnswer()">Submit</button>
+        <input type="text" id="inputValue" required onkeydown="handleKeyPress(event)">
+        <button type="button" onclick="checkInput()">Submit</button>
     </form>
 
     <p id="result"></p>
 
     <script>
-        // Trigger checkAnswer() when Enter key is pressed
-        document.getElementById("inputValue").addEventListener("keypress", function(event) {
-            if (event.key === "Enter") {
-                event.preventDefault(); // Prevent form submission
-                checkAnswer();
-            }
-        });
+        function checkInput() {
+            var inputValue = document.getElementById('inputValue').value;
 
-        function checkAnswer() {
-            const userAnswer = document.getElementById('inputValue').value.trim().toLowerCase().replace(/\s+/g, "");
-            const correctAnswer = "you"; // Expected answer
+            // Your validation logic here
+            // For example, let's say the correct value is "openai"
+                // Correct, redirect to main.html
+                if (inputValue.toLowerCase() === "you") {
 
-            if (userAnswer === correctAnswer) {
-                alert("Correct! You may proceed.");
-                window.location.href = "main.html";
+                top.location.href = "main.html";
             } else {
-                alert("Incorrect. Try again!");
+                // Incorrect, show error message
+                document.getElementById('result').innerHTML = "Wrong answer. Please try again.";
+            }
+        }
+
+        function handleKeyPress(event) {
+            // Check if the pressed key is Enter (key code 13)
+            if (event.keyCode === 13) {
+                checkInput();
             }
         }
     </script>
