@@ -1,52 +1,97 @@
- <form id="validationForm">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Output Validation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 10% auto;
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            color: #333;
+        }
+        h2 {
+            color: #3168d7;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            font-size: 18px;
+            margin-right: 10px;
+        }
+
+        input {
+            padding: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 13px;
+            margin-top: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            font-size: 18px;
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>IYPL 2025 Quantum Hunt</h1>
+
+    <h2>To move on to the next phase</h2>
+
+    <h1>Decode the Given Morse Code???</h1>
+
+   <form id="validationForm">
         <label for="inputValue">Enter your answer:</label>
-        <input type="text" id="inputValue" required >
-        <button type="button" onclick="checkAnswer()">Submit</button>
+        <input type="text" id="inputValue" required onkeydown="handleKeyPress(event)">
+        <button type="button" onclick="checkInput()">Submit</button>
     </form>
 
     <p id="result"></p>
 
+    <script>
+        function checkInput() {
+            var inputValue = document.getElementById('inputValue').value;
 
+            // Your validation logic here
+            // For example, let's say the correct value is "openai"
+                // Correct, redirect to main.html
+                if (inputValue.toLowerCase() === "Congrats") {
 
-<script>
-    // Trigger checkAnswer() when Enter key is pressed
-    document.getElementById("inputValue").addEventListener("keypress", function(event) {
-        if (event.key === "Enter") {
-            checkAnswer();
+                top.location.href = "https://meet.google.com/now-hcbu-nvk";
+            } else {
+                // Incorrect, show error message
+                document.getElementById('result').innerHTML = "Wrong answer. Please try again.";
+            }
         }
-    });
 
-    function checkAnswer() {
-        const userAnswer = document.getElementById('inputValue').value.trim().toLowerCase().replace(/\s+/g, "");
-        const correctAnswer = "congrats"; // No spaces, all lowercase
-
-        if (userAnswer === correctAnswer) {
-            alert("Correct! You may proceed.");
-            window.top.location.href = "https://meet.google.com/now-hcbu-nvk";
-        } else {
-            alert("Incorrect. Try again!");
+        function handleKeyPress(event) {
+            // Check if the pressed key is Enter (key code 13)
+            if (event.keyCode === 13) {
+                checkInput();
+            }
         }
-    }
-
-    // Make the divider movable
-    const divider = document.getElementById("divider");
-    let isDragging = false;
-
-    divider.addEventListener("mousedown", (e) => {
-        isDragging = true;
-        document.addEventListener("mousemove", moveDivider);
-        document.addEventListener("mouseup", () => {
-            isDragging = false;
-            document.removeEventListener("mousemove", moveDivider);
-        });
-    });
-
-    function moveDivider(e) {
-        if (isDragging) {
-            let percent = (e.clientX / window.innerWidth) * 100;
-            percent = Math.max(10, Math.min(90, percent)); // Restrict range
-            document.querySelector(".container").style.flex = percent;
-            document.querySelector(".letter-container").style.flex = 100 - percent;
-        }
-    }
-</script>
+    </script>
+<style>
+</body>
+</html>
