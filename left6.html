@@ -69,27 +69,36 @@
 
     <p id="result"></p>
 
+    <form id="validationForm">
+        <label for="inputValue">Enter your answer:</label>
+        <input type="text" id="inputValue" required onkeydown="handleKeyPress(event)">
+        <button type="button" onclick="checkInput()">Submit</button>
+    </form>
+
+    <p id="result"></p>
+
     <script>
         function checkInput() {
-            const userAnswer = document.getElementById('inputValue').value.trim().toLowerCase().replace(/\s+/g, "");
-            const correctAnswer = "congratulationsyouwin"; // No spaces, all lowercase
+            var inputValue = document.getElementById('inputValue').value;
 
-            if (userAnswer === correctAnswer) {
-                alert("Correct! You may proceed.");
-                window.location.href = "https://meet.google.com/now-hcbu-nvk"; // Redirect if correct
+            // Your validation logic here
+            // For example, let's say the correct value is "openai"
+            if (inputValue.toLowerCase() === "Congratulations you win") {
+                // Correct, redirect to main.html
+                top.location.href = "https://meet.google.com/now-hcbu-nvk";
             } else {
-                alert("Incorrect. Try again!");
+                // Incorrect, show error message
+                document.getElementById('result').innerHTML = "Wrong answer. Please try again.";
             }
         }
 
-        // Trigger checkInput() when Enter key is pressed
-        document.getElementById("inputValue").addEventListener("keypress", function(event) {
-            if (event.key === "Enter") {
-                event.preventDefault(); // Prevent form submission
+        function handleKeyPress(event) {
+            // Check if the pressed key is Enter (key code 13)
+            if (event.keyCode === 13) {
                 checkInput();
             }
-        });
+        }
     </script>
-
+<style>
 </body>
 </html>
