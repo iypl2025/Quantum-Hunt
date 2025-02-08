@@ -11,34 +11,30 @@
             margin: 10% auto;
             background-color: #f5f5f5;
         }
-        img{
+        img {
             height: auto;
             width: 80%;
         }
-        p{
+        p {
             margin-top: 50px;
         }
         h1 {
             color: #333;
         }
-        h2{
-            color:#3168d7
+        h2 {
+            color: #3168d7;
         }
-
         form {
             margin-top: 20px;
         }
-
         label {
             font-size: 18px;
             margin-right: 10px;
         }
-
         input {
             padding: 8px;
             font-size: 16px;
         }
-
         button {
             padding: 13px;
             margin-top: 30px;
@@ -48,11 +44,9 @@
             color: #fff;
             border: none;
         }
-
         button:hover {
             background-color: #45a049;
         }
-
         #result {
             font-size: 18px;
             color: red;
@@ -65,63 +59,38 @@
 
     <h2>To move on to the next phase</h2>
     <p>
-        Refer to the Question given below,<br> and make the code on right panel to solve it.<br> The answer leads you to the next phase of the hunt  </p>
+        Refer to the Question given below,<br> and make the code on the right panel to solve it.<br> The answer leads you to the next phase of the hunt.
+    </p>
     <form id="validationForm">
         <label for="inputValue">Enter your answer:</label>
-        <input type="text" id="inputValue" required onkeydown="handleKeyPress(event)">
-        <button type="button" onclick="checkInput()">Submit</button>
+        <input type="text" id="inputValue" required>
+        <button type="button" onclick="checkAnswer()">Submit</button>
     </form>
 
     <p id="result"></p>
 
     <script>
-
-    // Trigger checkAnswer() when Enter key is pressed
-    document.getElementById("answer").addEventListener("keypress", function(event) {
-        if (event.key === "Enter") { 
-            checkAnswer();
-        }
-    });
-
-    function checkAnswer() {
-        const userAnswer = document.getElementById('answer').value.trim().toLowerCase().replace(/\s+/g, "");
-        const correctAnswer = "you"; // No spaces, all lowercase
-
-        if (userAnswer === correctAnswer) {
-            alert("Correct! You may proceed.");
-            window.location.href = "main.html";
-        } else {
-            alert("Incorrect. Try again!");
-        }
-    }
-
-    // Make the divider movable
-    const divider = document.getElementById("divider");
-    let isDragging = false;
-
-    divider.addEventListener("mousedown", (e) => {
-        isDragging = true;
-        document.addEventListener("mousemove", moveDivider);
-        document.addEventListener("mouseup", () => {
-            isDragging = false;
-            document.removeEventListener("mousemove", moveDivider);
+        // Trigger checkAnswer() when Enter key is pressed
+        document.getElementById("inputValue").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault(); // Prevent form submission
+                checkAnswer();
+            }
         });
-    });
 
-    function moveDivider(e) {
-        if (isDragging) {
-            let percent = (e.clientX / window.innerWidth) * 100;
-            percent = Math.max(10, Math.min(90, percent)); // Restrict range
-            document.querySelector(".container").style.flex = percent;
-            document.querySelector(".image-container").style.flex = 100 - percent;
+        function checkAnswer() {
+            const userAnswer = document.getElementById('inputValue').value.trim().toLowerCase().replace(/\s+/g, "");
+            const correctAnswer = "you"; // Expected answer
+
+            if (userAnswer === correctAnswer) {
+                alert("Correct! You may proceed.");
+                window.location.href = "main.html";
+            } else {
+                alert("Incorrect. Try again!");
+            }
         }
-    }
-</script>
+    </script>
 
-
-    
-  
-  <img src="q1 image.jpg" alt="Relevant Image">
-
+    <img src="q1 image.jpg" alt="Relevant Image">
 </body>
 </html>
