@@ -60,38 +60,58 @@
     <h2>To move on to the next phase</h2>
 
     <h1>Decode the Given Morse Code???</h1>
-
-   <form id="validationForm">
+    
+ <form id="validationForm">
         <label for="inputValue">Enter your answer:</label>
-        <input type="text" id="inputValue" required onkeydown="handleKeyPress(event)">
-        <button type="button" onclick="checkInput()">Submit</button>
+        <input type="text" id="inputValue" required >
+        <button type="button" onclick="checkAnswer()">Submit</button>
     </form>
 
     <p id="result"></p>
 
-    <script>
-        function checkInput() {
-            var inputValue = document.getElementById('inputValue').value;
 
-            // Your validation logic here
-            // For example, let's say the correct value is "openai"
-                // Correct, redirect to main.html
-                if (inputValue.toLowerCase() === "Congrats") {
-
-                top.location.href = "https://meet.google.com/now-hcbu-nvk";
-            } else {
-                // Incorrect, show error message
-                document.getElementById('result').innerHTML = "Wrong answer. Please try again.";
-            }
+<script>
+    // Trigger checkAnswer() when Enter key is pressed
+    document.getElementById("inputValue").addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            checkAnswer();
         }
+    });
 
-        function handleKeyPress(event) {
-            // Check if the pressed key is Enter (key code 13)
-            if (event.keyCode === 13) {
-                checkInput();
-            }
+    function checkAnswer() {
+        const userAnswer = document.getElementById('inputValue').value.trim().toLowerCase().replace(/\s+/g, "");
+        const correctAnswer = "congrats"; // No spaces, all lowercase
+
+        if (userAnswer === correctAnswer) {
+            alert("Correct! You may proceed.");
+            window.top.location.href = "https://meet.google.com/now-hcbu-nvk";
+        } else {
+            alert("Incorrect. Try again!");
         }
-    </script>
+    }
+
+    // Make the divider movable
+    const divider = document.getElementById("divider");
+    let isDragging = false;
+
+    divider.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        document.addEventListener("mousemove", moveDivider);
+        document.addEventListener("mouseup", () => {
+            isDragging = false;
+            document.removeEventListener("mousemove", moveDivider);
+        });
+    });
+
+    function moveDivider(e) {
+        if (isDragging) {
+            let percent = (e.clientX / window.innerWidth) * 100;
+            percent = Math.max(10, Math.min(90, percent)); // Restrict range
+            document.querySelector(".container").style.flex = percent;
+            document.querySelector(".letter-container").style.flex = 100 - percent;
+        }
+    }
+</script>
 <style>
 </body>
 </html>
