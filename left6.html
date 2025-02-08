@@ -69,14 +69,6 @@
 
     <p id="result"></p>
 
-    <form id="validationForm">
-        <label for="inputValue">Enter your answer:</label>
-        <input type="text" id="inputValue" required onkeydown="handleKeyPress(event)">
-        <button type="button" onclick="checkInput()">Submit</button>
-    </form>
-
-    <p id="result"></p>
-
     <script>
         function checkInput() {
             var inputValue = document.getElementById('inputValue').value;
